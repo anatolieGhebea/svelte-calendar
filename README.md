@@ -1,3 +1,6 @@
+# NOTES
+This package is mostly an extension for the 6edesign/svelte-calendar, for the time beeing refer to the orignal documentation.
+
 # svelte-calendar
 
 A small date picker built with Svelte 3. Demo available here: [view docs and examples](https://6edesign.github.io/svelte-calendar).
@@ -6,8 +9,14 @@ A small date picker built with Svelte 3. Demo available here: [view docs and exa
 
 ## Installation
 
+original package
 ```sh
 npm i -D svelte-calendar
+```
+
+this package
+```sh
+npm i @anatolieghebea/svelte-calendar
 ```
 
 ## Features
@@ -19,6 +28,7 @@ npm i -D svelte-calendar
 - Virtual/infinite grid for animation performance
 - Store-driven and extensible
 - [Localization](https://6edesign.github.io/svelte-calendar) using `day.js`
+- Posibility to disable an array of dates
 
 ## Usage within svelte-kit project
 
@@ -37,6 +47,25 @@ const config = {
 
 export default config;
 ```
+
+# Disabling dates 
+
+````
+  <script>
+  import dayjs from 'dayjs';
+	import { Datepicker } from '@anatolieghebea/svelte-calendar';
+
+	const today = new Date();
+	const tomorrow = dayjs().add(7, 'day').toDate();
+
+	// the format must be specified, it's used in the store to format and compare the dates to be excluded
+	const format = 'YYYY-MM-DD';
+	const disabled = [ dayjs().add(2, 'day').format(format), dayjs().add(4, 'day').format(format) ];
+
+  </script>
+  <Datepicker start={today} end={tomorrow} {format} disabledDates={disabled} />
+````
+
 
 ## Features In Development
 
